@@ -1,0 +1,67 @@
+from sets import Set
+WOCountries = Set()
+Countries = Set()
+
+handle1 = open('WorldBank2012DataWORegions.csv', 'rU')
+next(handle1)
+for line in handle1:
+    parts1 = line.split(',')
+    WOCountries.add(parts1[1])
+
+
+handle2 = open('WorldBank2012Regions.csv', 'rU')
+next(handle2)
+for line in handle2:
+    parts2 = line.split(',')
+    Countries.add(parts2[1])
+
+
+if WOCountries == Countries:
+    print 'They are equal!'
+elif WOCountries.issuperset(Countries):
+    print 'WOCountries is the superset!'
+    print WOCountries.difference(Countries)
+
+print
+print WOCountries.intersection(Countries)
+print 
+
+RegionCodes = Set()
+handle3 = open('WorldBank2012Regions.csv', 'rU')
+next(handle3)
+for line in handle3:
+    parts3 = line.split(',')
+    RegionCodes.add(parts3[2])
+
+
+#DUDE WTF IS THIS SHIT IDK WHAT TO DO
+print
+print 'Paritition?'
+if RegionCodes:
+    print 'Set is not empty. Length is:',len(RegionCodes)
+
+
+SSASA1 = Set()
+handle4 = open('WorldBank2012Regions.csv', 'rU')
+next(handle4)
+for line in handle4:
+    parts4 = line.split(',')
+    if (parts4[2] == "South Asian") or (parts4[2] == "Sub-Saharan Africa"):
+        SSASA1.add(parts4[1])
+SSASA = SSASA1.intersection(WOCountries.intersection(Countries))
+print SSASA1
+
+
+Aland = Set()
+handle5 = open('WorldBank2012DataWORegions.csv', 'rU')
+next(handle5)
+for line in handle5:
+    parts5 = line.split(',')
+    if (parts5[3] is "AG.LND.AGRI.ZS") and (parts5[4] > 10):
+        Aland.add(parts5[1])
+ArableLand = Aland.intersection(WOCountries.intersection(Countries))
+
+print
+#print SSASA.intersection(ArableLand)
+
+print
